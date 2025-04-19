@@ -16,8 +16,10 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-        <!-- SweetAlert link -->
+    <!-- SweetAlert link -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- JSZip Link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
   </head>
   <body>
@@ -60,6 +62,12 @@
         <p>Add new note</p>
       </li>
     </div>
+
+    <div class="download-container">
+      <button onclick="downloadNotesZip()" class="download-btn">
+        <i class="fa-solid fa-download"></i> Download All Notes
+      </button>
+    </div>    
 
     <script src="script.js"></script>
     <script src="search.js"></script>

@@ -134,3 +134,30 @@ addBtn.addEventListener("click", e => {
     closeIcon.click();
   }
 });
+
+// Download all notes in ZIP
+function downloadNotesZip() {
+  if (notes.length === 0) {
+    Swal.fire({
+      icon: 'info',
+      title: 'No notes to download',
+      text: 'You have no notes saved yet.',
+    });
+    return;
+  }
+
+  const zip = new JSZip();
+
+  notes.forEach((note, index) => {
+    const filename = `${note.title || "Untitled"}-${index + 1}.txt`;
+    const content = `Title: ${note.title || "Untitled"}\nDate: ${note.date}\n\n${note.description}`;
+    zip.file(filename, content);
+  });
+
+  zip.generateAsync({ type: "blob" }).then((content) => {
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(content);
+    link.download = "QuickNotes.zip";
+    link.click();
+  });
+}
