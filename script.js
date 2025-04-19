@@ -34,27 +34,26 @@ closeIcon.addEventListener("click", () => {
 });
 
 // Display existing notes from localStorage
-function showNotes() {
-  if (!notes) return;
+function showNotes(filtered = notes) {
   document.querySelectorAll(".note").forEach(li => li.remove());
-  notes.forEach((note, id) => {
+  filtered.forEach((note, id) => {
     let filterDesc = note.description.replaceAll("\n", '<br/>');
     let liTag = `<li class="note">
-                        <div class="details">
-                            <p>${note.title}</p>
-                            <span>${filterDesc}</span>
+                    <div class="details">
+                        <p>${note.title}</p>
+                        <span>${filterDesc}</span>
+                    </div>
+                    <div class="bottom-content">
+                        <span>${note.date}</span>
+                        <div class="settings">
+                            <i onclick="showMenu(this)" class="uil uil-ellipsis-h"></i>
+                            <ul class="menu">
+                                <li onclick="updateNote(${id}, '${note.title}', '${filterDesc}')"><i class="uil uil-pen"></i>Edit</li>
+                                <li onclick="deleteNote(${id})"><i class="uil uil-trash"></i>Delete</li>
+                            </ul>
                         </div>
-                        <div class="bottom-content">
-                            <span>${note.date}</span>
-                            <div class="settings">
-                                <i onclick="showMenu(this)" class="uil uil-ellipsis-h"></i>
-                                <ul class="menu">
-                                    <li onclick="updateNote(${id}, '${note.title}', '${filterDesc}')"><i class="uil uil-pen"></i>Edit</li>
-                                    <li onclick="deleteNote(${id})"><i class="uil uil-trash"></i>Delete</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>`;
+                    </div>
+                </li>`;
     addBox.insertAdjacentHTML("afterend", liTag);
   });
 }
