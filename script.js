@@ -162,35 +162,91 @@ function downloadNotesZip() {
   });
 }
 
-// Show the modal on load if not logged in
-if (!localStorage.getItem('isLoggedIn')) {
-  document.querySelector('.auth-modal').style.display = 'flex';  // Show modal on load
-}
+const downloadBtn = document.querySelector(".download-btn");
+const authPopupBox = document.querySelector(".auth-popup-box");
+const authForm = document.getElementById("auth-form");
+const closeAuthModal = document.querySelector(".close-auth-modal");
+const switchAuthText = document.getElementById("switch-auth");
+const usernameInput = document.getElementById("username");
+const emailInput = document.getElementById("email");
+let isRegistering = false;
 
-// Function to close the modal (on successful login/register)
-function closeAuthModal() {
-  document.querySelector('.auth-modal').style.display = 'none';
-  localStorage.setItem('isLoggedIn', 'true');  // Set logged-in state
-}
-
-// Event listener for showing register form
-document.getElementById('show-register').addEventListener('click', () => {
-  // Hide the login form and show the register form
-  document.querySelector('#login-form').style.display = 'none';
-  document.querySelector('#register-form').style.display = 'block';
+// Show the login modal when the download button is clicked
+downloadBtn.addEventListener("click", (e) => {
+  e.preventDefault(); // Prevent download button default action
+  const userData = localStorage.getItem("user");
   
-  // Hide the login title and show the register title
-  document.querySelector('#login-title').style.display = 'none';
-  document.querySelector('#register-title').style.display = 'block';
+  if (userData) {
+    // If user is already logged in, proceed with the download
+    Swal.fire({
+      title: 'Logged in!',
+      text: 'Download started.',
+      icon: 'success',
+    }).then(() => {
+      downloadNotesZip();
+    });
+  } else {
+    // Show the login/register modal
+    authPopupBox.classList.add("show");
+    document.querySelector("body").style.overflow = "hidden";
+  }
 });
 
-// Event listener for showing login form
-document.getElementById('show-login').addEventListener('click', () => {
-  // Hide the register form and show the login form
-  document.querySelector('#register-form').style.display = 'none';
-  document.querySelector('#login-form').style.display = 'block';
+// Handle form submission for login/register
+authForm.addEventListener("submit", (e) => {
+  e.preventDefault();
   
-  // Hide the register title and show the login title
-  document.querySelector('#register-title').style.display = 'none';
-  document.querySelector('#login-title').style.display = 'block';
+  const username = usernameInput.value.trim();
+  const email = emailInput.value.trim();
+
+  if (username) {
+    if (isRegistering && email) {
+      // Register the user
+      const user = { username, email };
+      localStorage.setItem("user", JSON.stringify(user));
+      Swal.fire({
+        icon: 'success',
+        title: `Registered! Welcome ${username}`,
+      }).then(() => {
+        authPopupBox.classList.remove("show");
+        document.querySelector("body").style.overflow = "auto";
+        downloadNotesZip(); // Start the download after registration
+      });
+    } else if (!isRegistering) {
+      // Login the user
+      const user = { username };
+      localStorage.setItem("user", JSON.stringify(user));
+      Swal.fire({
+        icon: 'success',
+        title: 'Logged in!',
+        text: 'Download started.',
+      }).then(() => {
+        authPopupBox.classList.remove("show");
+        document.querySelector("body").style.overflow = "auto";
+        downloadNotesZip(); // Start the download after login
+      });
+    }
+  }
+});
+
+// Switch between login and registration forms
+switchAuthText.addEventListener("click", () => {
+  isRegistering = !isRegistering;
+  if (isRegistering) {
+    document.querySelector("header p").innerText = "Register";
+    switchAuthText.innerText = "Already have an account? Login";
+    document.querySelector(".email").style.display = "block";
+    authForm.querySelector("button").innerText = "Register";
+  } else {
+    document.querySelector("header p").innerText = "Login";
+    switchAuthText.innerText = "Don't have an account? Register";
+    document.querySelector(".email").style.display = "none";
+    authForm.querySelector("button").innerText = "Login";
+  }
+});
+
+// Close the auth modal
+closeAuthModal.addEventListener("click", () => {
+  authPopupBox.classList.remove("show");
+  document.querySelector("body").style.overflow = "auto";
 });
