@@ -319,3 +319,100 @@ form button {
   color: #626CD6;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
+
+/* login pop-up*/
+.auth-popup-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+}
+
+.auth-popup-box.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.auth-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  max-width: 400px;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.auth-content header {
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.auth-content header p {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.auth-content header i {
+  color: #8b8989;
+  cursor: pointer;
+  font-size: 23px;
+}
+
+.auth-content form {
+  padding: 25px;
+}
+
+.auth-content form .row {
+  margin-bottom: 20px;
+}
+
+.auth-content form .row label {
+  font-size: 18px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.auth-content form input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.auth-content form button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background: #626CD6;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.25s ease;
+}
+
+.auth-content form button:hover {
+  background: #5053b3;
+}
+
+.switch-auth {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 20px;
+  color: #626CD6;
+  cursor: pointer;
+}
+
+.switch-auth:hover {
+  text-decoration: underline;
+}
