@@ -56,6 +56,34 @@
         </div>
       </div>
     </div>
+
+    <!-- Login/Register Modal -->
+    <div class="auth-modal">
+      <div class="auth-box">
+        <!-- Login Form -->
+        <div class="auth-form" id="login-form">
+          <h2 id="login-title">Login</h2> <!-- Login Title -->
+          <form id="login-form-fields">
+            <input type="text" placeholder="Username" id="username" required />
+            <input type="password" placeholder="Password" id="password" required />
+            <button type="submit">Login</button>
+            <p>Don't have an account? <span id="show-register">Register here</span></p>
+          </form>
+        </div>
+        
+        <!-- Register Form (Hidden by default) -->
+        <div class="auth-form" id="register-form" style="display: none;">
+          <h2 id="register-title">Register</h2> <!-- Register Title -->
+          <form id="register-form-fields">
+            <input type="text" placeholder="Username" id="reg-username" required />
+            <input type="password" placeholder="Password" id="reg-password" required />
+            <button type="submit">Register</button>
+            <p>Already have an account? <span id="show-login">Login here</span></p>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <div class="wrapper">
       <li class="add-box">
         <div class="icon"><i class="uil uil-plus"></i></div>
