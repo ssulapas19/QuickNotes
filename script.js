@@ -161,3 +161,36 @@ function downloadNotesZip() {
     link.click();
   });
 }
+
+// Show the modal on load if not logged in
+if (!localStorage.getItem('isLoggedIn')) {
+  document.querySelector('.auth-modal').style.display = 'flex';  // Show modal on load
+}
+
+// Function to close the modal (on successful login/register)
+function closeAuthModal() {
+  document.querySelector('.auth-modal').style.display = 'none';
+  localStorage.setItem('isLoggedIn', 'true');  // Set logged-in state
+}
+
+// Event listener for showing register form
+document.getElementById('show-register').addEventListener('click', () => {
+  // Hide the login form and show the register form
+  document.querySelector('#login-form').style.display = 'none';
+  document.querySelector('#register-form').style.display = 'block';
+  
+  // Hide the login title and show the register title
+  document.querySelector('#login-title').style.display = 'none';
+  document.querySelector('#register-title').style.display = 'block';
+});
+
+// Event listener for showing login form
+document.getElementById('show-login').addEventListener('click', () => {
+  // Hide the register form and show the login form
+  document.querySelector('#register-form').style.display = 'none';
+  document.querySelector('#login-form').style.display = 'block';
+  
+  // Hide the register title and show the login title
+  document.querySelector('#register-title').style.display = 'none';
+  document.querySelector('#login-title').style.display = 'block';
+});
