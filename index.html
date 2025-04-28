@@ -58,27 +58,24 @@
     </div>
 
     <!-- Login/Register Modal -->
-    <div class="auth-modal">
-      <div class="auth-box">
-        <!-- Login Form -->
-        <div class="auth-form" id="login-form">
-          <h2 id="login-title">Login</h2> <!-- Login Title -->
-          <form id="login-form-fields">
-            <input type="text" placeholder="Username" id="username" required />
-            <input type="password" placeholder="Password" id="password" required />
+    <div class="auth-popup-box">
+      <div class="auth-popup">
+        <div class="auth-content">
+          <header>
+            <p>Login</p>
+            <i class="uil uil-times close-auth-modal"></i>
+          </header>
+          <form id="auth-form">
+            <div class="row username">
+              <label>Username</label>
+              <input type="text" id="username" placeholder="Enter your username" required />
+            </div>
+            <div class="row email" style="display: none;">
+              <label>Email</label>
+              <input type="email" id="email" placeholder="Enter your email" required />
+            </div>
             <button type="submit">Login</button>
-            <p>Don't have an account? <span id="show-register">Register here</span></p>
-          </form>
-        </div>
-        
-        <!-- Register Form (Hidden by default) -->
-        <div class="auth-form" id="register-form" style="display: none;">
-          <h2 id="register-title">Register</h2> <!-- Register Title -->
-          <form id="register-form-fields">
-            <input type="text" placeholder="Username" id="reg-username" required />
-            <input type="password" placeholder="Password" id="reg-password" required />
-            <button type="submit">Register</button>
-            <p>Already have an account? <span id="show-login">Login here</span></p>
+            <p class="switch-auth" id="switch-auth">Don't have an account? Register</p>
           </form>
         </div>
       </div>
